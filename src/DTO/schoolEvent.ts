@@ -20,3 +20,8 @@ export class JoinSchoolEvent extends BaseUserDTO {
   @ApiProperty({ description: "피드 리스트" })
   content: SchoolEvent[];
 }
+
+export class GetSchoolEventByIdResponse extends BaseUserDTO {
+  @ApiProperty({ description: "피드" })
+  content: SchoolEvent;
+}

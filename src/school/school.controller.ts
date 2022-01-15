@@ -10,7 +10,11 @@ import {
 import { ApiOkResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
 import { BaseResponseDTO } from "src/DTO/http";
 import { GetBirthdayResponse } from "../DTO/school";
-import { JoinSchoolEvent, SchoolEventArgDTO } from "../DTO/schoolEvent";
+import {
+  GetSchoolEventByIdResponse,
+  JoinSchoolEvent,
+  SchoolEventArgDTO,
+} from "../DTO/schoolEvent";
 import { SchoolService } from "./school.service";
 
 @Controller("school")
@@ -50,8 +54,30 @@ export class SchoolController {
 
   @Get("event/:id")
   @ApiOperation({ description: "피드 개개인 저회" })
-  @ApiOkResponse({ description: "성공 시" })
+  @ApiOkResponse({ description: "성공 시", type: GetSchoolEventByIdResponse })
   getSchoolEventById(@Param("id") id: number) {
     return this.schoolService.getSchoolEventById(id);
+  }
+
+  @Post("event/:id/emoji")
+  @ApiOperation({ description: "피드에 이모지달기" })
+  @ApiOkResponse({ description: "성공 시", type: BaseResponseDTO })
+  postEmoji(
+    @Headers("authorization") token: string,
+    @Param("id") id: number,
+    @Body() data: { content: string }
+  ) {
+    return this.schoolService.postEmojiBySchoolEvent(token, id, data.content);
+  }
+
+  @Post("event/:id/comment")
+  @ApiOperation({ description: "피드에 댓글달기" })
+  @ApiOkResponse({ description: "성공 시", type: BaseResponseDTO })
+  postComment(
+    @Headers("authorization") token: string,
+    @Param("id") id: number,
+    @Body() data: { content: string }
+  ) {
+    return this.schoolService.postCommentBySchoolEvent(token, id, data.content);
   }
 }

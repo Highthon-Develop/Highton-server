@@ -3,7 +3,12 @@ import { EventImage } from "../entity";
 import { getUserIdxByAccessToken } from "src/util/crypto";
 import { Repository } from "typeorm";
 import { SchoolEventArgDTO } from "../DTO/schoolEvent";
-import { SchoolEventRepository, UserRepository } from "../repository";
+import {
+  CommentRepository,
+  EmojiRepository,
+  SchoolEventRepository,
+  UserRepository,
+} from "../repository";
 import { InjectRepository } from "@nestjs/typeorm";
 @Injectable()
 export class SchoolService {
@@ -11,7 +16,9 @@ export class SchoolService {
     private userRepo: UserRepository,
     private schoolEventRepo: SchoolEventRepository,
     @InjectRepository(EventImage)
-    private eventImageRepository: Repository<EventImage>
+    private eventImageRepository: Repository<EventImage>,
+    private commentRepo: CommentRepository,
+    private emojiRepo: EmojiRepository
   ) {}
 
   async getBirthDayListBySchoolIdx(schoolIdx: number) {
@@ -58,5 +65,31 @@ export class SchoolService {
     const result = await this.schoolEventRepo.getSchoolEventById(idx);
 
     return { success: true, content: result };
+  }
+
+  async postCommentBySchoolEvent(
+    token: string,
+    schoolEventIdx: number,
+    content: string
+  ) {
+    const userIdx = getUserIdxByAccessToken(token);
+    const _ = await this.commentRepo.postComment(
+      content,
+      userIdx,
+      schoolEventIdx
+    );
+
+    return { success: true };
+  }
+
+  async postEmojiBySchoolEvent(
+    token: string,
+    schoolEventIdx: number,
+    content: string
+  ) {
+    const userIdx = getUserIdxByAccessToken(token);
+    const _ = await this.emojiRepo.addEmoji(userIdx, schoolEventIdx, content);
+
+    return { success: true };
   }
 }
