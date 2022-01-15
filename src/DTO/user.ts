@@ -9,7 +9,7 @@ export class TargetUserIdxObject {
 
 export class GetFolloUser extends BaseResponseDTO {
   @ApiProperty({ description: "검색 결과" })
-  content: User[];
+  content: UserDTO[];
 }
 
 export class ProfileResponseDTO extends BaseResponseDTO {

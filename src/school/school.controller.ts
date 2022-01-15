@@ -8,7 +8,8 @@ import {
   Query,
 } from "@nestjs/common";
 import { ApiOkResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
-import { BaseResponseDTO } from "src/DTO/http";
+import { BaseResponseDTO } from "../DTO/http";
+import { SomeContnetDTO } from "../user/user.controller";
 import { GetBirthdayResponse } from "../DTO/school";
 import {
   GetSchoolEventByIdResponse,
@@ -65,7 +66,7 @@ export class SchoolController {
   postEmoji(
     @Headers("authorization") token: string,
     @Param("id") id: number,
-    @Body() data: { content: string }
+    @Body() data: SomeContnetDTO
   ) {
     return this.schoolService.postEmojiBySchoolEvent(token, id, data.content);
   }
@@ -76,7 +77,7 @@ export class SchoolController {
   postComment(
     @Headers("authorization") token: string,
     @Param("id") id: number,
-    @Body() data: { content: string }
+    @Body() data: SomeContnetDTO
   ) {
     return this.schoolService.postCommentBySchoolEvent(token, id, data.content);
   }

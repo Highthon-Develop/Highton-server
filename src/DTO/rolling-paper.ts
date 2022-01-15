@@ -1,8 +1,11 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { RollingPaper } from "../entity";
 
-export interface WriteRollingPaperDTO {
+export class WriteRollingPaperDTO {
+  @ApiProperty({ description: "대충 롤링페이퍼 내용" })
   content: string;
+
+  @ApiProperty({ description: "유저 인덱스" })
   userIdx: number;
 }
 
