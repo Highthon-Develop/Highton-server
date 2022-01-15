@@ -26,9 +26,31 @@ export class RegistDTO extends BaseUserDTO {
 
   @ApiProperty({ description: "표준학교코드" })
   SD_SCHUL_CODE: string;
+
+  @ApiProperty({ description: "학년" })
+  grade: number;
+
+  @ApiProperty({ description: "성별" })
+  sex: "Male" | "Female" | "Secret";
+
+  @ApiProperty({ description: "닉네임" })
+  nickname: string;
 }
 
 export class LoginResponseDTO {
   @ApiProperty({ description: "액세스 토큰" })
   token: string;
+}
+
+export class RegistResponseDTO {
+  @ApiProperty({ description: "성공 여부" })
+  success: boolean;
+
+  @ApiProperty({ description: "유저 인덱스" })
+  userIdx: number;
+}
+
+export class BadRequestResponseDTO {
+  message: string;
+  success: boolean;
 }

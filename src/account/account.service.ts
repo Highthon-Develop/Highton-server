@@ -34,7 +34,6 @@ export class AccountService {
         ATPT_OFCDC_SC_CODE,
         SD_SCHUL_CODE,
       });
-      console.log(data.generatedMaps);
 
       schoolIdx = data[0];
     }
@@ -48,22 +47,33 @@ export class AccountService {
         name: data.name,
         schoolIdx,
         password: hashPassword(data.password),
+        grade: data.grade,
+        sex: data.sex,
+        nickname: data.nickname,
       });
-      return result;
+      return { success: true, userIdx: result.generatedMaps[0].id };
     } catch (e: any) {
-      throw new InternalServerErrorException("왜 에러가 날까");
+      throw new BadRequestException({
+        message:
+          "왜 에러가 날까, 대부분은 인자값 덜 넣어서 에러가 일어납니다.\n또는 같은 이메일은 중복이라 걸러질지도",
+        success: false,
+      });
     }
   }
 
   async login(data: BaseUserDTO) {
     if (!data.email || !data.password) {
-      throw new BadRequestException("아이이 또는 패스워드 값이 없네요");
+      throw new BadRequestException({
+        message:
+          "왜 에러가 날까, 대부분은 인자값 덜 넣어서 에러가 일어납니다.\n또는 같은 이메일은 중복이라 걸러질지도",
+        success: false,
+      });
     }
     const result = await this.userRepo.findByEmailAndPassword({
       email: data.email,
       password: hashPassword(data.password),
     });
     const token = generateAccessToken(result.id);
-    return { token };
+    return { token, success: true };
   }
 }

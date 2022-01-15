@@ -1,6 +1,17 @@
 import { Body, Controller, Post } from "@nestjs/common";
-import { ApiOkResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
-import { BaseUserDTO, LoginResponseDTO, RegistDTO } from "./account.DTO";
+import {
+  ApiBadRequestResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from "@nestjs/swagger";
+import {
+  BadRequestResponseDTO,
+  BaseUserDTO,
+  LoginResponseDTO,
+  RegistDTO,
+  RegistResponseDTO,
+} from "./account.DTO";
 import { AccountService } from "./account.service";
 
 @Controller("account")
@@ -13,7 +24,11 @@ export class AccountController {
     summary: "회원가입",
     description: "회원가입합니다, 아이디 패스워드 필수",
   })
-  @ApiOkResponse({ description: "성공 시", status: 201 })
+  @ApiOkResponse({ description: "성공 시", type: RegistResponseDTO })
+  @ApiBadRequestResponse({
+    description: "값이 잘못됐을 때",
+    type: BadRequestResponseDTO,
+  })
   regist(@Body() data: RegistDTO) {
     return this.accountService.regist(data);
   }
@@ -24,6 +39,10 @@ export class AccountController {
     description: "로그인입니다. 아이디 패스워드 넘겨주세용",
   })
   @ApiOkResponse({ description: "성공 시", type: LoginResponseDTO })
+  @ApiBadRequestResponse({
+    description: "값이 잘못됐을 때",
+    type: BadRequestResponseDTO,
+  })
   login(@Body() data: BaseUserDTO) {
     return this.accountService.login(data);
   }
