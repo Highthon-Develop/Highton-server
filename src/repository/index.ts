@@ -5,6 +5,7 @@ import { SchoolEventRepository } from "./schoolEvent";
 import { SchoolRepository } from "./school";
 import { UserRepository } from "./user";
 import { RollingPaperRepository } from "./rollingPaper";
+import { EventImage } from "../entity";
 
 export const RepositoryList = [
   CommentRepository,
@@ -14,6 +15,7 @@ export const RepositoryList = [
   SchoolRepository,
   UserRepository,
   RollingPaperRepository,
+  EventImage,
 ];
 
 export * from "./comment";

@@ -1,4 +1,5 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { SchoolEvent } from ".";
 import { Diary } from "./diary";
 import { User } from "./user";
 
@@ -15,4 +16,7 @@ export class Emoji {
 
   @ManyToOne("Diary")
   diary: Diary;
+
+  @ManyToOne("SchoolEvent")
+  schoolEvent: SchoolEvent;
 }

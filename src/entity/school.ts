@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { SchoolEvent } from ".";
 
 @Entity()
 export class School {
@@ -16,4 +17,7 @@ export class School {
 
   @Column()
   SD_SCHUL_CODE: string;
+
+  @OneToMany("SchoolEvent", "school")
+  schoolEvents: SchoolEvent[];
 }

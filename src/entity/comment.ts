@@ -1,6 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
-import { Diary } from "./diary";
-import { User } from "./user";
+import { SchoolEvent, Diary, User } from ".";
 
 @Entity()
 export class Comment {
@@ -10,7 +9,7 @@ export class Comment {
   @Column()
   content: string;
 
-  @Column({ type: "tinyint" })
+  @Column()
   isRecordComment: boolean;
 
   @ManyToOne("User")
@@ -18,4 +17,7 @@ export class Comment {
 
   @ManyToOne("Diary")
   diary: Diary;
+
+  @ManyToOne("SchoolEvent")
+  schoolEvent: SchoolEvent;
 }
