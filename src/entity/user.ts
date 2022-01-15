@@ -3,7 +3,13 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
+  OneToMany,
+  ManyToOne,
 } from "typeorm";
+import { Diary } from "./diary";
+import { Emoji } from "./emoji";
+import { School } from "./school";
+import { Comment } from "./comment";
 
 @Entity()
 export class User {
@@ -24,4 +30,16 @@ export class User {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @OneToMany("Diary", "user")
+  diaries: Diary[];
+
+  @OneToMany("Emoji", "user")
+  emojies: Emoji[];
+
+  @OneToMany("Comment", "user")
+  comments: Comment[];
+
+  @ManyToOne("School")
+  school: School;
 }

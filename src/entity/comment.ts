@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { Diary } from "./diary";
+import { User } from "./user";
 
 @Entity()
 export class Comment {
@@ -10,4 +12,10 @@ export class Comment {
 
   @Column({ type: "tinyint" })
   isRecordComment: boolean;
+
+  @ManyToOne("User")
+  user: User;
+
+  @ManyToOne("Diary")
+  diary: Diary;
 }
