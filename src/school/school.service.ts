@@ -48,5 +48,9 @@ export class SchoolService {
 
     return { success: true };
   }
-  async joinSchoolEvent() {}
+  async joinSchoolEvent(page: number, criteria: "popular" | "recently") {
+    const result = await this.schoolEventRepo.joinSchoolEvent(page, criteria);
+
+    return { success: true, content: result };
+  }
 }

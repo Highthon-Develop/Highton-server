@@ -4,6 +4,7 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   OneToMany,
+  CreateDateColumn,
 } from "typeorm";
 import { Emoji, School, Comment } from ".";
 
@@ -29,6 +30,9 @@ export class SchoolEvent {
 
   @ManyToOne("School")
   school: School;
+
+  @CreateDateColumn()
+  createdAt: Date;
 }
 
 @Entity()
