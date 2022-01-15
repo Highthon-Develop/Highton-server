@@ -16,7 +16,11 @@ export class SchoolEventRepository extends Repository<SchoolEvent> {
     return this.find({
       take: 20,
       skip: (page - 1) * 20,
-      order: criteria === "popular" ? { emojis: "ASC" } : { createdAt: "DESC" },
+      join: {
+        alias: "schoolEvent",
+        leftJoinAndSelect: { emojis: "schoolEvent.emojis" },
+      },
+      order: criteria === "popular" ? { idx: "ASC" } : { idx: "DESC" },
     });
   }
 }
