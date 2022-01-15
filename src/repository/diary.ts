@@ -11,7 +11,7 @@ export class DiaryRepository extends Repository<Diary> {
     return this.createQueryBuilder("diary")
       .leftJoinAndSelect("diary.comments", "comment")
       .leftJoinAndSelect("diary.emojies", "emoji")
-      .where("userId = :userIdx", { userIdx })
+      .where("diary.userId = :userIdx", { userIdx })
       .getMany();
   }
 }

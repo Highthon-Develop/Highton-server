@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Headers } from "@nestjs/common";
+import { Body, Controller, Post, Headers, Get } from "@nestjs/common";
 import {
   ApiBadRequestResponse,
   ApiOkResponse,
@@ -6,7 +6,11 @@ import {
   ApiTags,
 } from "@nestjs/swagger";
 import { BadRequestResponseDTO } from "../DTO/http";
-import { WriteDiaryRequestDTO, WriteDiaryResponseDTO } from "../DTO/diary";
+import {
+  JoinDiaryResponseDTO,
+  WriteDiaryRequestDTO,
+  WriteDiaryResponseDTO,
+} from "../DTO/diary";
 import { DiaryService } from "./diary.service";
 
 @Controller("diary")
@@ -29,5 +33,19 @@ export class DiaryController {
     @Body() data: WriteDiaryRequestDTO
   ) {
     return this.diaryService.writeDiary(token, data.content);
+  }
+
+  @Get("")
+  @ApiOperation({
+    summary: "한 줄 일기 조회",
+    description: "일기를 조회합니다. 헤더에 토큰 필수",
+  })
+  @ApiOkResponse({ description: "성공 시", type: JoinDiaryResponseDTO })
+  @ApiBadRequestResponse({
+    description: "값이 잘못됐을 때",
+    type: BadRequestResponseDTO,
+  })
+  getDiaryList(@Headers("authorization") token: string) {
+    return this.diaryService.joinDiary(token);
   }
 }

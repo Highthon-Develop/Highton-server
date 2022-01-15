@@ -21,4 +21,19 @@ export class DiaryService {
       });
     }
   }
+
+  async joinDiary(token: string) {
+    try {
+      const userIdx = getUserIdxByAccessToken(token);
+
+      const result = await this.diaryRepo.findDiaryByUserIdx(userIdx);
+
+      return { success: true, content: result };
+    } catch {
+      throw new BadRequestException({
+        message: "토큰이 유효하지않습니다",
+        success: false,
+      });
+    }
+  }
 }
