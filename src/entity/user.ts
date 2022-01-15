@@ -5,6 +5,8 @@ import {
   CreateDateColumn,
   OneToMany,
   ManyToOne,
+  ManyToMany,
+  JoinTable,
 } from "typeorm";
 import { Diary } from "./diary";
 import { Emoji } from "./emoji";
@@ -55,4 +57,12 @@ export class User {
 
   @OneToMany("RollingPaper", "owner")
   rollingPaper: RollingPaper[];
+
+  @ManyToMany(() => User)
+  @JoinTable()
+  following: User[];
+
+  @ManyToMany(() => User)
+  @JoinTable()
+  followers: User[];
 }
