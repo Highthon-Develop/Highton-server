@@ -16,7 +16,6 @@ import { ConfigModule } from "@nestjs/config";
       logging: true,
       url: process.env.DB_URL,
     }),
-    ,
   ],
 })
 export class AppModule {}
