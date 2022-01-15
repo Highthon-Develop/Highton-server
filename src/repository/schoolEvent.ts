@@ -26,4 +26,17 @@ export class SchoolEventRepository extends Repository<SchoolEvent> {
       order: criteria === "popular" ? { idx: "ASC" } : { idx: "DESC" },
     });
   }
+
+  async getSchoolEventById(idx: number) {
+    return this.findOne(idx, {
+      join: {
+        alias: "schoolEvent",
+        leftJoinAndSelect: {
+          emojis: "schoolEvent.emojis",
+          comments: "schoolEvent.comments",
+          school: "schoolEvent.school",
+        },
+      },
+    });
+  }
 }

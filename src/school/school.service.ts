@@ -53,4 +53,10 @@ export class SchoolService {
 
     return { success: true, content: result };
   }
+
+  async getSchoolEventById(idx: number) {
+    const result = await this.schoolEventRepo.getSchoolEventById(idx);
+
+    return { success: true, content: result };
+  }
 }

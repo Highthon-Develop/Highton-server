@@ -47,4 +47,11 @@ export class SchoolController {
   ) {
     return this.schoolService.joinSchoolEvent(page, criteria);
   }
+
+  @Get("event/:id")
+  @ApiOperation({ description: "피드 개개인 저회" })
+  @ApiOkResponse({ description: "성공 시" })
+  getSchoolEventById(@Param("id") id: number) {
+    return this.schoolService.getSchoolEventById(id);
+  }
 }
