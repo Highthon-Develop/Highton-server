@@ -10,7 +10,7 @@ import {
 import { ApiOkResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
 import { BaseResponseDTO } from "src/DTO/http";
 import { GetBirthdayResponse } from "../DTO/school";
-import { SchoolEventArgDTO } from "../DTO/schoolEvent";
+import { JoinSchoolEvent, SchoolEventArgDTO } from "../DTO/schoolEvent";
 import { SchoolService } from "./school.service";
 
 @Controller("school")
@@ -40,7 +40,7 @@ export class SchoolController {
 
   @Get("event")
   @ApiOperation({ description: "피드 조회" })
-  @ApiOkResponse({ description: "성공 시" })
+  @ApiOkResponse({ description: "성공 시", type: JoinSchoolEvent })
   joinSchoolEvent(
     @Query("page") page: number,
     @Query("criteria") criteria: "popular" | "recently"
