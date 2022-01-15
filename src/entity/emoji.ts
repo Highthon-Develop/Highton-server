@@ -1,4 +1,4 @@
-import { Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Diary } from "./diary";
 import { User } from "./user";
 
@@ -6,6 +6,9 @@ import { User } from "./user";
 export class Emoji {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column()
+  kind: string;
 
   @ManyToOne("User")
   user: User;
