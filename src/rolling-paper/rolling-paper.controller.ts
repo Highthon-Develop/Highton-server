@@ -1,6 +1,12 @@
 import { Controller, Post, Headers, Body } from "@nestjs/common";
-import { ApiOperation, ApiTags } from "@nestjs/swagger";
-import { WriteRollingPaperDTO } from "src/DTO/rolling-paper";
+import {
+  ApiBadRequestResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from "@nestjs/swagger";
+import { BadRequestResponseDTO } from "../DTO/http";
+import { WriteRollingPaperDTO } from "../DTO/rolling-paper";
 import { RollingPaperService } from "./rolling-paper.service";
 
 @Controller("rolling-paper")
@@ -12,6 +18,11 @@ export class RollingPaperController {
   @ApiOperation({
     summary: "대충 롤링페이퍼 생성",
     description: "대충 롤링페이퍼를 해당 유저가 쓸 수 있또록 하는 것.",
+  })
+  @ApiOkResponse({ description: "성공 시" })
+  @ApiBadRequestResponse({
+    description: "요청이 잘못들어오면",
+    type: BadRequestResponseDTO,
   })
   writeRollingPaper(
     @Headers("authorization") token: string,
