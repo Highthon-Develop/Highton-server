@@ -16,7 +16,10 @@ export class RollingPaperRepository extends Repository<RollingPaper> {
     });
   }
 
-  getThisYearRollingPaper(userIdx: number): Promise<RollingPaper[]> {
-    return this.find({ where: { owner: { id: userIdx } } });
+  getRollingPaperByYear(
+    userIdx: number,
+    year: number
+  ): Promise<RollingPaper[]> {
+    return this.find({ where: { owner: { id: userIdx }, year } });
   }
 }

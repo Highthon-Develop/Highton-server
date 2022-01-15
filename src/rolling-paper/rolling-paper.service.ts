@@ -33,4 +33,20 @@ export class RollingPaperService {
       });
     }
   }
+
+  async getRollingPaperByYear(token: string, year: number) {
+    try {
+      const userIdx: number = getUserIdxByAccessToken(token);
+      const result = await this.rollingPaperRepo.getRollingPaperByYear(
+        userIdx,
+        year
+      );
+      return { success: true, content: result };
+    } catch (e: unknown) {
+      throw new BadRequestException({
+        message: "토큰이 잘못되었을지도",
+        success: false,
+      });
+    }
+  }
 }

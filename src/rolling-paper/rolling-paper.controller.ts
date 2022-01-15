@@ -1,4 +1,12 @@
-import { Controller, Post, Headers, Body } from "@nestjs/common";
+import {
+  Controller,
+  Post,
+  Headers,
+  Body,
+  Get,
+  Header,
+  Param,
+} from "@nestjs/common";
 import {
   ApiBadRequestResponse,
   ApiOkResponse,
@@ -6,7 +14,10 @@ import {
   ApiTags,
 } from "@nestjs/swagger";
 import { BadRequestResponseDTO } from "../DTO/http";
-import { WriteRollingPaperDTO } from "../DTO/rolling-paper";
+import {
+  WriteRollingPaperDTO,
+  JoinRollingPaperResponseDTO,
+} from "../DTO/rolling-paper";
 import { RollingPaperService } from "./rolling-paper.service";
 
 @Controller("rolling-paper")
@@ -33,5 +44,22 @@ export class RollingPaperController {
       data.userIdx,
       token
     );
+  }
+
+  @Get(":year")
+  @ApiOperation({
+    summary: "대충 롤링페이퍼 조회",
+    description: "롤링페이퍼를 조회합니다. 이쁘고 귀엽고 깜찍하게.",
+  })
+  @ApiBadRequestResponse({
+    description: "요청 좀 똑디 안보냉께 이게 뜨지",
+    type: BadRequestResponseDTO,
+  })
+  @ApiOkResponse({ description: "성공 시", type: JoinRollingPaperResponseDTO })
+  joinMyRollingPaper(
+    @Headers("authorization") token: string,
+    @Param("year") year: number
+  ) {
+    return this.rollingPaperService.getRollingPaperByYear(token, year);
   }
 }
