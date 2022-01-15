@@ -7,3 +7,7 @@ export class BadRequestResponseDTO {
   @ApiProperty({ description: "성공 여부" })
   success: boolean;
 }
+export class BaseResponseDTO {
+  @ApiProperty({ description: "성공 여부" })
+  success: boolean;
+}

@@ -5,7 +5,14 @@ import {
   UseInterceptors,
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
-import { ApiBody, ApiConsumes, ApiProperty, ApiTags } from "@nestjs/swagger";
+import {
+  ApiBody,
+  ApiConsumes,
+  ApiOkResponse,
+  ApiProperty,
+  ApiTags,
+} from "@nestjs/swagger";
+import { GetImgUrlList } from "src/DTO/img";
 import { ImgService } from "./img.service";
 
 export class FileUploadDto {
@@ -25,6 +32,7 @@ export class ImgController {
     description: "profile picture update",
     type: FileUploadDto,
   })
+  @ApiOkResponse({ description: "성공 시", type: GetImgUrlList })
   imgUpload(@UploadedFile("file") files: File[]) {
     return this.imgService.imagesUpload(files);
   }

@@ -8,11 +8,8 @@ import {
   Param,
 } from "@nestjs/common";
 import { ApiOkResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
-import {
-  BaseResponseDTO,
-  GetFolloUser,
-  TargetUserIdxObject,
-} from "../DTO/user";
+import { GetFolloUser, TargetUserIdxObject } from "../DTO/user";
+import { BaseResponseDTO } from "../DTO/http";
 import { UserService } from "./user.service";
 
 @Controller("user")

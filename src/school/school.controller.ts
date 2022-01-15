@@ -1,5 +1,6 @@
 import { Controller, Get, Param, Headers, Body, Post } from "@nestjs/common";
 import { ApiOkResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
+import { BaseResponseDTO } from "src/DTO/http";
 import { GetBirthdayResponse } from "../DTO/school";
 import { SchoolEventArgDTO } from "../DTO/schoolEvent";
 import { SchoolService } from "./school.service";
@@ -21,6 +22,7 @@ export class SchoolController {
 
   @Post("event")
   @ApiOperation({ description: "피드 생성" })
+  @ApiOkResponse({ description: "성공 시", type: BaseResponseDTO })
   createSchoolEvent(
     @Headers("authorization") token: string,
     @Body() data: SchoolEventArgDTO
