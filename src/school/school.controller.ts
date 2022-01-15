@@ -1,6 +1,7 @@
-import { Controller, Get, Param } from "@nestjs/common";
+import { Controller, Get, Param, Headers, Body, Post } from "@nestjs/common";
 import { ApiOkResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
-import { GetBirthdayResponse } from "src/DTO/school";
+import { GetBirthdayResponse } from "../DTO/school";
+import { SchoolEventArgDTO } from "../DTO/schoolEvent";
 import { SchoolService } from "./school.service";
 
 @Controller("school")
@@ -16,5 +17,14 @@ export class SchoolController {
   @ApiOkResponse({ description: "성공 시", type: GetBirthdayResponse })
   getBirthDayListBySchool(@Param("id") schoolIdx: number) {
     return this.schoolService.getBirthDayListBySchoolIdx(schoolIdx);
+  }
+
+  @Post("event")
+  @ApiOperation({ description: "피드 생성" })
+  createSchoolEvent(
+    @Headers("authorization") token: string,
+    @Body() data: SchoolEventArgDTO
+  ) {
+    return this.schoolService.createSchoolEvent(token, data);
   }
 }
