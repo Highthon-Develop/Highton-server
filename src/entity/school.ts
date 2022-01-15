@@ -1,13 +1,13 @@
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Comment {
+export class School {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  content: string;
+  name: string;
 
-  @Column({ type: "tinyint" })
-  isRecordComment: boolean;
+  @Column({ unique: true })
+  domain: string;
 }
