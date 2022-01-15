@@ -10,4 +10,10 @@ export class School {
 
   @Column({ unique: true })
   domain: string;
+
+  @Column()
+  ATPT_OFCDC_SC_CODE: string;
+
+  @Column()
+  SD_SCHUL_CODE: string;
 }
