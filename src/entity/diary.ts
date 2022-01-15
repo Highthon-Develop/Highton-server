@@ -26,8 +26,7 @@ export class Diary {
   @CreateDateColumn()
   createdAt: Date;
 
-  @ManyToOne("User")
-  @JoinColumn()
+  @ManyToOne(() => User, (user) => user.diaries)
   user: User;
 
   @OneToMany("Comment", "diary")

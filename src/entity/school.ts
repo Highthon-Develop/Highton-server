@@ -3,13 +3,13 @@ import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class School {
   @PrimaryGeneratedColumn()
-  id: number;
+  idx: number;
 
   @Column()
   name: string;
 
-  @Column({ unique: true })
-  domain: string;
+  // @Column({ unique: true })
+  // domain: string;
 
   @Column()
   ATPT_OFCDC_SC_CODE: string;

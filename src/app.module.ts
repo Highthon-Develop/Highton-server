@@ -1,6 +1,7 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule } from "@nestjs/config";
+import { AccountModule } from "./account/account.module";
 
 @Module({
   imports: [
@@ -11,11 +12,12 @@ import { ConfigModule } from "@nestjs/config";
       type: "mysql",
       database: "record",
       autoLoadEntities: true,
-      synchronize: false,
-      entities: [__dirname + "/**/*/entity/*{.ts,.js}"],
+      synchronize: true,
+      entities: [__dirname + "/**/*/entity/*.{ts,js}"],
       logging: true,
       url: process.env.DB_URL,
     }),
+    AccountModule,
   ],
 })
 export class AppModule {}
