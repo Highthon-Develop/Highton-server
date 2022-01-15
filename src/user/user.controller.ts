@@ -65,4 +65,14 @@ export class UserController {
   getFollwing(@Param("id") id: number) {
     return this.userService.getFollowing(id);
   }
+
+  @Get("")
+  @ApiOperation({
+    summary: "추천 유저 리스트 조회",
+    description: "유저 추천 리스트 조회해버리기",
+  })
+  @ApiOkResponse({ description: "성공 시 ", type: GetFolloUser })
+  getRecommendationUserList() {
+    return this.userService.getRecommendationUser();
+  }
 }

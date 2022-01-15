@@ -25,4 +25,9 @@ export class UserService {
     const result = await this.userRepo.getFollowing(userIdx);
     return { success: true, content: result };
   }
+
+  async getRecommendationUser() {
+    const result = await this.userRepo.findRecommendationUser();
+    return { success: true, content: result };
+  }
 }

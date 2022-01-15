@@ -128,4 +128,10 @@ export class UserRepository extends Repository<User> {
       })
     ).following;
   }
+  async findRecommendationUser() {
+    const userCount = await this.count();
+    const skipValue = Math.random() * userCount;
+
+    return this.find({ take: 20, skip: ~~skipValue });
+  }
 }
