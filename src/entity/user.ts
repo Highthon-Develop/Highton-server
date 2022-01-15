@@ -19,6 +19,15 @@ export class User {
   @Column()
   name: string;
 
+  @Column()
+  grade: number;
+
+  @Column()
+  sex: "Male" | "Female";
+
+  @Column()
+  nickname: string;
+
   @Column({ type: "date" })
   birthDay: Date;
 
