@@ -23,10 +23,11 @@ export class User {
   grade: number;
 
   @Column()
-  sex: "Male" | "Female";
+  sex: "Male" | "Female" | "Secret";
 
   @Column()
   nickname: string;
+  s;
 
   @Column({ type: "date" })
   birthDay: Date;
