@@ -6,9 +6,15 @@ import {
   Body,
   Get,
   Param,
+  Post,
 } from "@nestjs/common";
 import { ApiOkResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
-import { GetFolloUser, TargetUserIdxObject, UserDTO } from "../DTO/user";
+import {
+  GetFolloUser,
+  ProfileResponseDTO,
+  TargetUserIdxObject,
+  UserDTO,
+} from "../DTO/user";
 import { BaseResponseDTO } from "../DTO/http";
 import { UserService } from "./user.service";
 
@@ -78,8 +84,21 @@ export class UserController {
     summary: "프로필 조회",
     description: "현재 로그인한 유저의 프로필 조회하기",
   })
-  @ApiOkResponse({ description: "성공 시", type: UserDTO })
+  @ApiOkResponse({ description: "성공 시", type: ProfileResponseDTO })
   joinProfile(@Headers("authorization") token: string) {
     return this.userService.getProfile(token);
+  }
+
+  @Post("profile")
+  @ApiOperation({
+    summary: "프로필 사진 수정",
+    description: "프로필 사진을 업데이트한다고!?!",
+  })
+  @ApiOkResponse({ description: "성공 시", type: BaseResponseDTO })
+  updateProfileImg(
+    @Headers("authorization") token: string,
+    @Body() data: { imgUrl: string }
+  ) {
+    return this.userService.setProfileImg(data.imgUrl, token);
   }
 }

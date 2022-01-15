@@ -19,6 +19,9 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ nullable: true })
+  profileImg?: string;
+
   @Column()
   name: string;
 

@@ -39,4 +39,14 @@ export class UserService {
 
     return { success: true, content: result };
   }
+
+  async setProfileImg(imgUrl: string, token: string) {
+    const userIdx = getUserIdxByAccessToken(token);
+    const _ = await this.userRepo.update(
+      { id: userIdx },
+      { profileImg: imgUrl }
+    );
+
+    return { success: true };
+  }
 }
