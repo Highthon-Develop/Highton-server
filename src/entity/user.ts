@@ -10,6 +10,7 @@ import { Diary } from "./diary";
 import { Emoji } from "./emoji";
 import { School } from "./school";
 import { Comment } from "./comment";
+import { RollingPaper } from "./rollingPaper";
 
 @Entity()
 export class User {
@@ -27,7 +28,6 @@ export class User {
 
   @Column()
   nickname: string;
-  s;
 
   @Column({ type: "date" })
   birthDay: Date;
@@ -52,4 +52,7 @@ export class User {
 
   @ManyToOne("School")
   school: School;
+
+  @OneToMany("RollingPaper", "owner")
+  rollingPaper: RollingPaper[];
 }

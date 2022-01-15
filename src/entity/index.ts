@@ -4,3 +4,4 @@ export { Emoji } from "./emoji";
 export { School } from "./school";
 export { User } from "./user";
 export { SchoolEvent } from "./schoolEvent";
+export { RollingPaper } from "./rollingPaper";

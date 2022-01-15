@@ -4,6 +4,7 @@ import { EmojiRepository } from "./emoji";
 import { SchoolEventRepository } from "./schoolEvent";
 import { SchoolRepository } from "./school";
 import { UserRepository } from "./user";
+import { RollingPaperRepository } from "./rollingPaper";
 
 export const RepositoryList = [
   CommentRepository,
@@ -12,6 +13,7 @@ export const RepositoryList = [
   SchoolEventRepository,
   SchoolRepository,
   UserRepository,
+  RollingPaperRepository,
 ];
 
 export * from "./comment";
@@ -20,3 +22,4 @@ export * from "./emoji";
 export * from "./schoolEvent";
 export * from "./school";
 export * from "./user";
+export * from "./rollingPaper";
