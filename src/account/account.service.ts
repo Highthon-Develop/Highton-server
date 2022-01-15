@@ -1,9 +1,5 @@
-import {
-  BadRequestException,
-  Injectable,
-  InternalServerErrorException,
-} from "@nestjs/common";
-import { BaseUserDTO, RegistDTO } from "./account.DTO";
+import { BadRequestException, Injectable } from "@nestjs/common";
+import { BaseUserDTO, RegistDTO } from "../DTO/account";
 import { UserRepository } from "../repository/user";
 import { SchoolRepository } from "../repository/school";
 import { generateAccessToken, hashPassword } from "../util/crypto";

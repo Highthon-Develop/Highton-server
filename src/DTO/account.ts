@@ -49,8 +49,3 @@ export class RegistResponseDTO {
   @ApiProperty({ description: "유저 인덱스" })
   userIdx: number;
 }
-
-export class BadRequestResponseDTO {
-  message: string;
-  success: boolean;
-}

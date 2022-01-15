@@ -18,9 +18,6 @@ export class Diary {
   id: number;
 
   @Column()
-  title: string;
-
-  @Column()
   content: string;
 
   @CreateDateColumn()

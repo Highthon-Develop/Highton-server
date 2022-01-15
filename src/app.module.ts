@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule } from "@nestjs/config";
 import { AccountModule } from "./account/account.module";
+import { DiaryModule } from './diary/diary.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { AccountModule } from "./account/account.module";
       url: process.env.DB_URL,
     }),
     AccountModule,
+    DiaryModule,
   ],
 })
 export class AppModule {}

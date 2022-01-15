@@ -9,5 +9,5 @@ export const generateAccessToken = (userIdx: number) =>
     expiresIn: "1y",
   });
 
-export const verifyAccessTOken = (token: string): number =>
+export const getUserIdxByAccessToken = (token: string): number =>
   verify(token, process.env.JWT_SECRET).userIdx;

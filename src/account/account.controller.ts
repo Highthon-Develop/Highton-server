@@ -5,13 +5,13 @@ import {
   ApiOperation,
   ApiTags,
 } from "@nestjs/swagger";
+import { BadRequestResponseDTO } from "../DTO/http";
 import {
-  BadRequestResponseDTO,
   BaseUserDTO,
   LoginResponseDTO,
   RegistDTO,
   RegistResponseDTO,
-} from "./account.DTO";
+} from "../DTO/account";
 import { AccountService } from "./account.service";
 
 @Controller("account")
