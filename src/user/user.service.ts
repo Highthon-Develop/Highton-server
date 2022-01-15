@@ -30,4 +30,13 @@ export class UserService {
     const result = await this.userRepo.findRecommendationUser();
     return { success: true, content: result };
   }
+
+  async getProfile(token: string) {
+    const idx = getUserIdxByAccessToken(token);
+    const result = await this.userRepo.findOne(idx, {
+      join: { alias: "user", leftJoinAndSelect: { school: "user.school" } },
+    });
+
+    return { success: true, content: result };
+  }
 }

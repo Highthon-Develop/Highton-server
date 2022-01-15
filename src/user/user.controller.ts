@@ -8,7 +8,7 @@ import {
   Param,
 } from "@nestjs/common";
 import { ApiOkResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
-import { GetFolloUser, TargetUserIdxObject } from "../DTO/user";
+import { GetFolloUser, TargetUserIdxObject, UserDTO } from "../DTO/user";
 import { BaseResponseDTO } from "../DTO/http";
 import { UserService } from "./user.service";
 
@@ -71,5 +71,15 @@ export class UserController {
   @ApiOkResponse({ description: "성공 시 ", type: GetFolloUser })
   getRecommendationUserList() {
     return this.userService.getRecommendationUser();
+  }
+
+  @Get("profile")
+  @ApiOperation({
+    summary: "프로필 조회",
+    description: "현재 로그인한 유저의 프로필 조회하기",
+  })
+  @ApiOkResponse({ description: "성공 시", type: UserDTO })
+  joinProfile(@Headers("authorization") token: string) {
+    return this.userService.getProfile(token);
   }
 }

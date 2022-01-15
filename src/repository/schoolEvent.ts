@@ -18,7 +18,10 @@ export class SchoolEventRepository extends Repository<SchoolEvent> {
       skip: (page - 1) * 20,
       join: {
         alias: "schoolEvent",
-        leftJoinAndSelect: { emojis: "schoolEvent.emojis" },
+        leftJoinAndSelect: {
+          emojis: "schoolEvent.emojis",
+          eventImages: "schoolEvent.eventImages",
+        },
       },
       order: criteria === "popular" ? { idx: "ASC" } : { idx: "DESC" },
     });
