@@ -9,11 +9,20 @@ export class UserService {
   async followUser(token, targetUserIdx) {
     const userIdx = getUserIdxByAccessToken(token);
     const result = await this.userRepo.followUser(userIdx, targetUserIdx);
-    return result;
+    return { success: result };
   }
   async unfollowUser(token, targetUserIdx) {
     const userIdx = getUserIdxByAccessToken(token);
     const result = await this.userRepo.unfollowUser(userIdx, targetUserIdx);
-    return result;
+    return { success: result };
+  }
+
+  async getFollower(userIdx: number) {
+    const result = await this.userRepo.getFollower(userIdx);
+    return { success: true, content: result };
+  }
+  async getFollowing(userIdx: number) {
+    const result = await this.userRepo.getFollowing(userIdx);
+    return { success: true, content: result };
   }
 }

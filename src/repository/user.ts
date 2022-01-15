@@ -63,7 +63,6 @@ export class UserRepository extends Repository<User> {
           leftJoinAndSelect: { following: "user.following" },
         },
       });
-      console.log(user);
       user.following = [...(user.following ?? []), targetUser];
       await this.save(user);
 
@@ -107,5 +106,26 @@ export class UserRepository extends Repository<User> {
       console.error(e);
       return false;
     }
+  }
+
+  async getFollower(idx: number) {
+    return (
+      await this.findOne(idx, {
+        join: {
+          alias: "user",
+          leftJoinAndSelect: { followers: "user.followers" },
+        },
+      })
+    ).followers;
+  }
+  async getFollowing(idx: number) {
+    return (
+      await this.findOne(idx, {
+        join: {
+          alias: "user",
+          leftJoinAndSelect: { following: "user.following" },
+        },
+      })
+    ).following;
   }
 }
